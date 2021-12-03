@@ -3,11 +3,14 @@ from dash import dash_table
 from dash import dcc # dash core components
 from dash import html
 
+from dash.dependencies import Input, Output # as interactive
+
 import pandas as pd
 
 df = pd.read_csv('https://bit.ly/elements-periodic-table')
 
 app = dash.Dash(__name__)
+server = app.server
 
 app.layout = dash_table.DataTable(
     id='table',
@@ -15,4 +18,5 @@ app.layout = dash_table.DataTable(
     data=df.to_dict('records'),
 )
 
-app.run_server(debug=True, host="0.0.0.0")
+if __name__ == '__main__':
+ app.run_server(debug=True)
